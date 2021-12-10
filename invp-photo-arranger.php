@@ -72,6 +72,10 @@ class Inventory_Presser_Photo_Arranger
 		{
 			$parent = get_post( $parent_id );
 		}
+		else
+		{
+			return;
+		}
 
 		//Is the new attachment attached to a vehicle?		
 		if( empty( $parent->post_type ) || INVP::POST_TYPE != $parent->post_type )
@@ -81,7 +85,7 @@ class Inventory_Presser_Photo_Arranger
 		}
 
 		//Update the photo to have a post_parent
-		$attachment->post_parent = $parent_id;
+		$attachment->post_parent = $parent->ID;
 		$this->safe_update_post( $attachment );
 
 		$this->maybe_add_gallery( $parent );
